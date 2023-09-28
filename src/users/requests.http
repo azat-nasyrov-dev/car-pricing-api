@@ -1,0 +1,28 @@
+### Create a new user
+POST http://localhost:3001/api/auth/signup
+Content-Type: application/json
+
+{
+  "email": "samfisher@gmail.com",
+  "password": "7777"
+}
+
+### Find all users with a given email
+GET http://localhost:3001/api/auth?email=test@test.com
+
+
+### Find a particular user with a given ID
+GET http://localhost:3001/api/auth/2
+
+
+### Delete a particular user with a given ID
+DELETE http://localhost:3001/api/auth/1
+
+
+### Update a particular user with a given ID
+PATCH http://localhost:3001/api/auth/1
+Content-Type: application/json
+
+{
+  "email": "sarafisher@gmail.com"
+}
