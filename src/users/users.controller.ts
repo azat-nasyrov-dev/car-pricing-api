@@ -6,16 +6,27 @@ import {
   NotFoundException,
   Param,
   Patch,
+  Post,
   Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UserEntity } from './entities/user.entity';
 import { USER_NOT_FOUND_ERROR } from './users.constants';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { AuthService } from './auth.service';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('Auth')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly authService: AuthService,
+  ) {}
+
+  @Post('/signup')
+  public async createUser(@Body() body: CreateUserDto): Promise<UserEntity> {
+    return await this.authService.signup(body.email, body.password);
+  }
 
   @Get()
   public async findAllUsers(
