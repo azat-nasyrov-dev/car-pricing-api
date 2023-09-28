@@ -15,8 +15,11 @@ import { USER_NOT_FOUND_ERROR } from './users.constants';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { Serialize } from '../interceptors/serialize.interceptor';
+import { UserDto } from './dto/user.dto';
 
 @Controller('Auth')
+@Serialize(UserDto)
 export class UsersController {
   constructor(
     private readonly usersService: UsersService,

@@ -3,8 +3,8 @@ POST http://localhost:3001/api/auth/signup
 Content-Type: application/json
 
 {
-  "email": "samfisher@gmail.com",
-  "password": "7777"
+  "email": "jamesbond@gmail.com",
+  "password": "007"
 }
 
 ### Find all users with a given email
