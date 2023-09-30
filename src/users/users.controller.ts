@@ -8,6 +8,7 @@ import {
   Patch,
   Post,
   Query,
+  Session,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UserEntity } from './entities/user.entity';
@@ -26,14 +27,29 @@ export class UsersController {
     private readonly authService: AuthService,
   ) {}
 
+  @Get('/whoami')
+  public async whoAmI(@Session() session: any): Promise<UserEntity> {
+    return await this.usersService.findUserById(session.userId);
+  }
+
   @Post('/signup')
-  public async createUser(@Body() body: CreateUserDto): Promise<UserEntity> {
-    return await this.authService.signup(body.email, body.password);
+  public async createUser(
+    @Body() body: CreateUserDto,
+    @Session() session: any,
+  ): Promise<UserEntity> {
+    const user = await this.authService.signup(body.email, body.password);
+    session.userId = user.id;
+    return user;
   }
 
   @Post('/signin')
-  public async login(@Body() body: CreateUserDto) {
-    return await this.authService.signin(body.email, body.password);
+  public async login(
+    @Body() body: CreateUserDto,
+    @Session() session: any,
+  ): Promise<UserEntity> {
+    const user = await this.authService.signin(body.email, body.password);
+    session.userId = user.id;
+    return user;
   }
 
   @Get()

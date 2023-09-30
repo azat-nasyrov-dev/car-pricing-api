@@ -1,7 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
-import cookieSession from 'cookie-session';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const cookieSession = require('cookie-session');
 
 async function bootstrap() {
   const port = process.env.PORT || 3000;
