@@ -7,7 +7,11 @@ import { UsersService } from './users.service';
 import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { promisify } from 'util';
 import { UserEntity } from './entities/user.entity';
-import { BAD_REQUEST_ERROR, USER_NOT_FOUND_ERROR } from './users.constants';
+import {
+  EMAIL_IN_USE_ERROR,
+  PASSWORD_BAD_ERROR,
+  USER_NOT_FOUND_ERROR,
+} from './users.constants';
 
 const scrypt = promisify(_scrypt);
 
@@ -19,7 +23,7 @@ export class AuthService {
     const users = await this.usersService.findListOfUsers(email);
 
     if (users.length) {
-      throw new BadRequestException(BAD_REQUEST_ERROR);
+      throw new BadRequestException(EMAIL_IN_USE_ERROR);
     }
 
     const salt = randomBytes(8).toString('hex');
@@ -40,7 +44,7 @@ export class AuthService {
     const hash = (await scrypt(password, salt, 32)) as Buffer;
 
     if (storedHash !== hash.toString('hex')) {
-      throw new BadRequestException(BAD_REQUEST_ERROR);
+      throw new BadRequestException(PASSWORD_BAD_ERROR);
     }
 
     return user;

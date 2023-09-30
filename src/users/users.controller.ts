@@ -31,6 +31,11 @@ export class UsersController {
     return await this.authService.signup(body.email, body.password);
   }
 
+  @Post('/signin')
+  public async login(@Body() body: CreateUserDto) {
+    return await this.authService.signin(body.email, body.password);
+  }
+
   @Get()
   public async findAllUsers(
     @Query('email') email: string,
