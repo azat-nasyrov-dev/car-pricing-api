@@ -20,6 +20,10 @@ Content-Type: application/json
 GET http://localhost:3001/api/auth/whoami
 
 
+### Sign out
+POST http://localhost:3001/api/auth/signout
+
+
 ### Find all users with a given email
 GET http://localhost:3001/api/auth?email=test@test.com
 

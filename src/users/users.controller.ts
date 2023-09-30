@@ -29,7 +29,18 @@ export class UsersController {
 
   @Get('/whoami')
   public async whoAmI(@Session() session: any): Promise<UserEntity> {
-    return await this.usersService.findUserById(session.userId);
+    const user = await this.usersService.findUserById(session.userId);
+
+    if (!user) {
+      throw new NotFoundException(USER_NOT_FOUND_ERROR);
+    }
+
+    return user;
+  }
+
+  @Post('/signout')
+  public signOut(@Session() session: any): void {
+    session.userId = null;
   }
 
   @Post('/signup')
