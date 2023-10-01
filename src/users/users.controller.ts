@@ -44,6 +44,10 @@ export class UsersController {
 
   @Get('/whoami')
   public whoAmI(@CurrentUser() user: UserEntity) {
+    if (!user) {
+      throw new NotFoundException(USER_NOT_FOUND_ERROR);
+    }
+
     return user;
   }
 
