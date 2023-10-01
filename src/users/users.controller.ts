@@ -9,6 +9,7 @@ import {
   Post,
   Query,
   Session,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UserEntity } from './entities/user.entity';
@@ -19,6 +20,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { Serialize } from '../interceptors/serialize.interceptor';
 import { UserDto } from './dto/user.dto';
 import { CurrentUser } from './decorators/current-user.decorator';
+import { AuthGuard } from '../guards/auth.guard';
 
 @Controller('Auth')
 @Serialize(UserDto)
@@ -28,18 +30,8 @@ export class UsersController {
     private readonly authService: AuthService,
   ) {}
 
-  // @Get('/whoami')
-  // public async whoAmI(@Session() session: any): Promise<UserEntity> {
-  //   const user = await this.usersService.findUserById(session.userId);
-  //
-  //   if (!user) {
-  //     throw new NotFoundException(USER_NOT_FOUND_ERROR);
-  //   }
-  //
-  //   return user;
-  // }
-
   @Get('/whoami')
+  @UseGuards(AuthGuard)
   public whoAmI(@CurrentUser() user: UserEntity) {
     if (!user) {
       throw new NotFoundException(USER_NOT_FOUND_ERROR);
