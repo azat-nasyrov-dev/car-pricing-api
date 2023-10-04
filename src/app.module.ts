@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmConfigService } from './config/typeorm.config';
 import { UsersModule } from './users/users.module';
+import { ReportsModule } from './reports/reports.module';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const cookieSession = require('cookie-session');
 
@@ -19,6 +20,7 @@ const cookieSession = require('cookie-session');
       useClass: TypeOrmConfigService,
     }),
     UsersModule,
+    ReportsModule,
   ],
   controllers: [AppController],
   providers: [
