@@ -1,0 +1,13 @@
+### Create a new report
+POST http://localhost:3001/api/reports
+Content-Type: application/json
+
+{
+  "price": 500000,
+  "make": "toyota",
+  "model": "corolla",
+  "year": 1980,
+  "longitude": 0,
+  "latitude": 0,
+  "mileage": 100000
+}
