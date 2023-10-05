@@ -12,8 +12,8 @@ POST http://localhost:3001/api/auth/signin
 Content-Type: application/json
 
 {
-  "email": "johndoe@gmail.com",
-  "password": "123456"
+  "email": "test@test.com",
+  "password": "12345"
 }
 
 ### Get the currently signed in user
