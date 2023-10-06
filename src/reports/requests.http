@@ -3,13 +3,13 @@ POST http://localhost:3001/api/reports
 Content-Type: application/json
 
 {
-  "price": 500000,
-  "make": "toyota",
-  "model": "corolla",
-  "year": 1980,
-  "longitude": 0,
-  "latitude": 0,
-  "mileage": 100000
+  "price": 20000,
+  "make": "ford",
+  "model": "mustang",
+  "year": 1982,
+  "longitude": 45,
+  "latitude": 45,
+  "mileage": 5000
 }
 
 ### Approve an existing report
@@ -19,3 +19,6 @@ Content-Type: application/json
 {
   "approved": true
 }
+
+### Get an estimate for existing vehicle
+GET http://localhost:3001/api/reports?make=ford&model=mustang&longitude=45&latitude=45&mileage=30000&year=1981
