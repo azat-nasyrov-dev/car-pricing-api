@@ -15,6 +15,7 @@ import { UserEntity } from '../users/entities/user.entity';
 import { Serialize } from '../interceptors/serialize.interceptor';
 import { ReportDto } from './dto/report.dto';
 import { ApproveReportDto } from './dto/approve-report.dto';
+import { AdminGuard } from '../guards/admin.guard';
 
 @Controller('Reports')
 export class ReportsController {
@@ -31,6 +32,7 @@ export class ReportsController {
   }
 
   @Patch('/:id')
+  @UseGuards(AdminGuard)
   public async approveReport(
     @Param('id') id: string,
     @Body() body: ApproveReportDto,

@@ -13,7 +13,7 @@ Content-Type: application/json
 }
 
 ### Approve an existing report
-PATCH http://localhost:3001/api/reports/7
+PATCH http://localhost:3001/api/reports/9
 Content-Type: application/json
 
 {
