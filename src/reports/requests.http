@@ -11,3 +11,11 @@ Content-Type: application/json
   "latitude": 0,
   "mileage": 100000
 }
+
+### Approve an existing report
+PATCH http://localhost:3001/api/reports/7
+Content-Type: application/json
+
+{
+  "approved": false
+}
